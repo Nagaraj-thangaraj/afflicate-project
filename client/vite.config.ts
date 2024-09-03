@@ -3,17 +3,8 @@ import react from "@vitejs/plugin-react";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
-  plugins: [
-    react(),
-    nodePolyfills({
-      // Optional: Specify Node.js built-ins you need here
-      // options: { include: ['process'] }
-    }),
-  ],
-  define: {
-    "process.env": {}, // Optional: Define `process.env` as an empty object if needed
-  },
+  plugins: [react(), nodePolyfills()],
   build: {
-    outDir: "dist", // This is the output directory for your build
+    outDir: "dist", // This tells Vite to output the build to the `dist` directory
   },
 });
