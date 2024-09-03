@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const productRoutes = require("./routes/productRoutes");
 const bodyParser = require("body-parser");
-// Load environment variables from .env file
 require("dotenv").config();
 
 const app = express();
@@ -11,32 +10,28 @@ const app = express();
 app.use(express.json());
 app.use("/api", productRoutes);
 
-// Environment variables
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
-// Check if MONGODB_URI is defined
 if (!MONGODB_URI) {
   console.error("MongoDB URI is not defined in the environment variables.");
-  process.exit(1); // Exit the application if MONGODB_URI is not set
+  process.exit(1);
 }
 
-// Connect to MongoDB
+// Connect to MongoDB without deprecated options
 mongoose
   .connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000,
+    // Deprecated options removed
   })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
-    process.exit(1); // Exit the application if the connection fails
+    process.exit(1);
   });
-// Configure CORS
+
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow requests from your frontend origin
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -44,22 +39,20 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
 
-app.enable("trust proxy"); // Enable trust proxy for Heroku
+app.enable("trust proxy");
 
-// Middleware setup
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173"); // Allow all origins
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Allow these HTTP methods
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Allow these headers
+  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-  // Handle preflight requests
   if (req.method === "OPTIONS") {
-    return res.sendStatus(200); // Send 200 OK for OPTIONS requests
+    return res.sendStatus(200);
   }
 
   next();
 });
-// Start the server
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
