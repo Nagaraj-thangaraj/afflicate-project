@@ -16,7 +16,7 @@ const apiUrl = import.meta.env.VITE_API_BACKEND_URL;
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${apiUrl}/api/`,
+    baseUrl: `${apiUrl}/api`,
   }),
   endpoints: (builder) => ({
     getProducts: builder.query<GetProductsResponse, GetProductsQueryParams>({
