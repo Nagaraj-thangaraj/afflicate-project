@@ -4,17 +4,20 @@ import { useCreateProductMutation } from "../features/products/productApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+import { Product } from "../types/Product";
 
 const CreateProduct = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
   const [createProduct] = useCreateProductMutation();
-  const [productData, setProductData] = useState({
-    productName: "", // Change 'name' to 'productName'
-    productPrice: "", // Change 'price' to 'productPrice'
-    productUrl: "", // Change 'url' to 'productUrl'
-    productDescription: "", // Change 'description' to 'productDescription'
-    productLink: "", // Change 'link' to 'productLink'
-    productGenre: "", // Adding missing productGenre field
+  const [productData, setProductData] = useState<Product>({
+    _id: "",
+    productName: "",
+    productPrice: "",
+    productUrl: "",
+    productDescription: "",
+    productLink: "",
+    productGenre: "",
+    // Add any other required fields here
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +33,7 @@ const CreateProduct = () => {
       await createProduct(productData).unwrap();
       toast.success("Product created successfully!");
       setProductData({
+        _id: "",
         productName: "", // Reset field to match backend requirement
         productPrice: "",
         productUrl: "",
