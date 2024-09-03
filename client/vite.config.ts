@@ -6,14 +6,14 @@ export default defineConfig({
   plugins: [
     react(),
     nodePolyfills({
-      // Customize this if you need specific Node.js built-ins
+      // Optional: Specify Node.js built-ins you need here
       // options: { include: ['process'] }
     }),
   ],
   define: {
-    "process.env": {}, // Define `process.env` as an empty object if necessary
+    "process.env": {}, // Optional: Define `process.env` as an empty object if needed
   },
   build: {
-    outDir: "dist", // Ensure this matches your Render Publish Directory
+    outDir: "dist", // This is the output directory for your build
   },
 });
