@@ -33,9 +33,7 @@ mongoose
     console.error("Error connecting to MongoDB:", err);
     process.exit(1);
   });
-app.use("/", (req, res) => {
-  res.send("Hello World");
-});
+
 app.use("/api", productRoutes);
 
 app.listen(PORT, () => {
