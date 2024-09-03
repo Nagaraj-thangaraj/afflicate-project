@@ -16,7 +16,7 @@ interface GetProductsResponse {
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_BACKEND_URL}/api`,
+    baseUrl: import.meta.env.VITE_BACKEND_URL,
   }),
   endpoints: (builder) => ({
     getProducts: builder.query<GetProductsResponse, GetProductsQueryParams>({
