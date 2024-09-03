@@ -8,3 +8,11 @@ export interface Product {
   productGenre: string;
   productLink: string;
 }
+export interface ProductCreateRequest {
+  productName: string;
+  productPrice: string;
+  productUrl: string;
+  productDescription: string;
+  productLink: string;
+  productGenre: string;
+}

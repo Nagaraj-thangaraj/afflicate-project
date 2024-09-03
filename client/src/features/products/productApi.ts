@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Product } from "../../types/Product";
+import { Product, ProductCreateRequest } from "../../types/Product";
 interface GetProductsQueryParams {
   page: number;
   limit: number;
@@ -23,7 +23,7 @@ export const productApi = createApi({
       query: ({ page, limit, genre }) =>
         `/products?page=${page}&limit=${limit}&genre=${genre || ""}`,
     }),
-    createProduct: builder.mutation<void, Product>({
+    createProduct: builder.mutation<Product, ProductCreateRequest>({
       query: (productData) => ({
         url: "products",
         method: "POST",

@@ -9,7 +9,25 @@ const router = express.Router();
 // Create Product
 router.post("/products", async (req, res) => {
   try {
-    const newProduct = new Product(req.body);
+    const {
+      productName,
+      productPrice,
+      productUrl,
+      productDescription,
+      productLink,
+      productGenre,
+    } = req.body;
+
+    // Create a new product without including _id
+    const newProduct = new Product({
+      productName,
+      productPrice,
+      productUrl,
+      productDescription,
+      productLink,
+      productGenre,
+    });
+
     const savedProduct = await newProduct.save();
     res.status(201).json(savedProduct);
   } catch (err) {
