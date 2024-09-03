@@ -21,6 +21,7 @@ import FootWear from "./component/FootWear";
 import Clothing from "./component/Clothing";
 import useProgressBar from "./hooks/useProgressBar";
 import "nprogress/nprogress.css";
+
 interface ProgressBarHandlerProps {
   children: ReactNode;
 }

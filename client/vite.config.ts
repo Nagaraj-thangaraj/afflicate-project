@@ -1,10 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
+// import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
-  plugins: [react(), nodePolyfills()],
+  plugins: [react()],
   build: {
-    outDir: "dist", // This tells Vite to output the build to the `dist` directory
+    rollupOptions: {
+      external: [], // Add external dependencies here if needed
+    },
   },
 });
