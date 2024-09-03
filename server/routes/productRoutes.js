@@ -1,6 +1,9 @@
 const express = require("express");
 const Product = require("../models/Product");
 
+require("dotenv").config();
+
+const MONGODB_URI = process.env.MONGODB_URI;
 const router = express.Router();
 
 // Create Product

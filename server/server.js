@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api", productRoutes);
 
+// Environment variables
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -24,9 +25,16 @@ if (!MONGODB_URI) {
 
 // Connect to MongoDB
 mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 50000,
+  })
   .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("Error connecting to MongoDB:", err));
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err);
+    process.exit(1); // Exit the application if the connection fails
+  });
 
 // Start the server
 app.listen(PORT, () => {
