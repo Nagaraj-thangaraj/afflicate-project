@@ -15,4 +15,7 @@ export default defineConfig({
   define: {
     "process.env": {}, // Optional: Define `process.env` as an empty object if needed
   },
+  build: {
+    outDir: "dist",
+  },
 });
