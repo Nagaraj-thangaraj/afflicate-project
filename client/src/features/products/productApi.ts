@@ -12,11 +12,11 @@ interface GetProductsResponse {
   totalProducts: number;
 }
 // Access environment variable using import.meta.env
-const apiUrl = import.meta.env.VITE_API_BACKEND_URL;
+
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${apiUrl}/api`,
+    baseUrl: `${process.env.REACT_APP_BACKEND_URL}/api`,
   }),
   endpoints: (builder) => ({
     getProducts: builder.query<GetProductsResponse, GetProductsQueryParams>({
