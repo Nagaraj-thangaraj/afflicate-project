@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/api", productRoutes);
 
 // Environment variables
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // Check if MONGODB_URI is defined
