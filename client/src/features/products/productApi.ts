@@ -11,9 +11,13 @@ interface GetProductsResponse {
   totalPages: number;
   totalProducts: number;
 }
+// Access environment variable using import.meta.env
+const apiUrl = import.meta.env.VITE_API_BACKEND_URL;
 export const productApi = createApi({
   reducerPath: "productApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${apiUrl}/api/`,
+  }),
   endpoints: (builder) => ({
     getProducts: builder.query<GetProductsResponse, GetProductsQueryParams>({
       query: ({ page, limit, genre }) =>
