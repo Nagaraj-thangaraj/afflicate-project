@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const productRoutes = require("./routes/productRoutes");
-
+const bodyParser = require("body-parser");
 // Load environment variables from .env file
 require("dotenv").config();
 
@@ -41,6 +41,10 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
+
+app.enable("trust proxy"); // Enable trust proxy for Heroku
 
 // Middleware setup
 app.use((req, res, next) => {
