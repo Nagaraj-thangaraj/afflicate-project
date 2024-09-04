@@ -8,5 +8,6 @@ export default defineConfig({
     rollupOptions: {
       external: [], // Add external dependencies here if needed
     },
+    outDir: "dist",
   },
 });
